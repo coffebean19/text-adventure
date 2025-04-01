@@ -13,7 +13,4 @@ extern OBJECT objs[];
 #define guard       (objs + 4)
 #define player      (objs + 5)
 
-#define endOfbjs    (objs + 6)
-
-#include <stdio.h>
-#include "obj"
+#define endOfObjs    (objs + 6)
