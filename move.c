@@ -5,7 +5,7 @@ static void describeMove(OBJECT *obj, OBJECT *to) {
     if (to == player->location) {
         printf("You drop %s.\n", obj->description);
     } else if (to != player) {
-        printf(to == guard ? "You give %s to %s.\n" : "You put %s in %s.\n", obj->description, to description);
+        printf(to == guard ? "You give %s to %s.\n" : "You put %s in %s.\n", obj->description, to->description);
     } else if (obj->location == player->location) {
         printf("You pick up %s.\n", obj->description);
     } else {

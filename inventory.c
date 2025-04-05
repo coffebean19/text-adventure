@@ -21,7 +21,7 @@ void executeGet(const char * noun) {
 
 
 void executeDrop(const char * noun) {
-    moveObject(gotPossessionPlayer(player, "drop", noun), player->location);
+    moveObject(getPossession(player, "drop", noun), player->location);
 }
 
 void executeAsk(const char * noun) {
