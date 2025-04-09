@@ -23,7 +23,7 @@ DISTANCE getDistance(OBJECT *from, OBJECT *to) {
     return  to == NULL                                  ? distUnknownObject :
             to == from                                  ? distSelf :
             isHolding(from, to)                         ? distHeld :
-            isHolding(to, from)                         ? distLocation
+            isHolding(to, from)                         ? distLocation :
             isHolding(from->location, to)               ? distHere :  
             isHolding(from, to->location)               ? distHeldContained :  
             isHolding(from->location, to->location)     ? distHeldContained :            
@@ -44,7 +44,7 @@ int listObjectsAtLocation(OBJECT *location) {
     int count = 0;
     OBJECT *obj;
     for (obj = objs; obj < endOfObjs; obj++) {
-        if (obj != player && isHoldingj(location, obj)) {
+        if (obj != player && isHolding(location, obj)) {
             if (count++ == 0) {
                 printf("You see:\n");
             }
