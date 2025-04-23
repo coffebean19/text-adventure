@@ -12,7 +12,7 @@ extern OBJECT objs[];
 
 - field
     description "an open field"
-    tags        "field
+    tags        "field"
 
 - cave 
     description "a little cave"
@@ -48,7 +48,7 @@ extern OBJECT objs[];
     description "an exit to the west"
     tags        "west", "exit"
     location    cave
-    destination field`
+    destination field
 
 - wallField
     description "dense forest all around"
