@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include "object.h"
 static const char *tags0[] = { "field", NULL};
@@ -6,13 +7,19 @@ static const char *tags2[] = { "silver", "coin", "silver coin", NULL};
 static const char *tags3[] = { "gold", "coin", "gold coin", NULL};
 static const char *tags4[] = { "guard", "burly guard", NULL};
 static const char *tags5[] = { "yourself", NULL};
+static bool condition6(void)  { return guard->health == 0 || silver->location == guard; }
 static const char *tags6[] = { "east", "entrance", NULL};
-static const char *tags7[] = { "west", "exit", NULL};
-static const char *tags8[] = { "west", "north", "south", "forest", NULL};
-static const char *tags9[] = { "east", "north", "south", "rock", NULL};
+static bool condition7(void)  { return guard->health > 0 && silver->location != guard; }
+static const char *tags7[] = { "east", "entrance", NULL};
+static const char *tags8[] = { "west", "exit", NULL};
+static const char *tags9[] = { "west", "north", "south", "forest", NULL};
+static const char *tags10[] = { "east", "north", "south", "rock", NULL};
+
+static bool alwaysTrue(void) { return true; }
 
 OBJECT objs[] = {
 	{	/* 0 = field */
+		alwaysTrue,
 		 "an open field",
 		tags0,
 		NULL,
@@ -26,6 +33,7 @@ OBJECT objs[] = {
 		0
 	},
 	{	/* 1 = cave */
+		alwaysTrue,
 		 "a little cave",
 		tags1,
 		NULL,
@@ -39,6 +47,7 @@ OBJECT objs[] = {
 		0
 	},
 	{	/* 2 = silver */
+		alwaysTrue,
 		 "a silver coin",
 		tags2,
 		 field,
@@ -52,6 +61,7 @@ OBJECT objs[] = {
 		0
 	},
 	{	/* 3 = gold */
+		alwaysTrue,
 		 "a gold coin",
 		tags3,
 		 cave,
@@ -65,6 +75,7 @@ OBJECT objs[] = {
 		0
 	},
 	{	/* 4 = guard */
+		alwaysTrue,
 		 "a burly guard",
 		tags4,
 		 field,
@@ -78,6 +89,7 @@ OBJECT objs[] = {
 		 100
 	},
 	{	/* 5 = player */
+		alwaysTrue,
 		 "yourself",
 		tags5,
 		 field,
@@ -91,6 +103,7 @@ OBJECT objs[] = {
 		 100
 	},
 	{	/* 6 = intoCave */
+		condition6,
 		 "a cave entrance to the east",
 		tags6,
 		 field,
@@ -98,14 +111,29 @@ OBJECT objs[] = {
 		 cave,
 		 "The entrance is just a narrow opening in a small outcrop.",
 		"You see",
-		 "The guard stops you from entering the cave.",
+		 "You walk into the cave.",
 		99,
 		0,
 		0
 	},
-	{	/* 7 = exitCave */
-		 "an exit to the west",
+	{	/* 7 = intoCaveBlock */
+		condition7,
+		 "a cave entrance to the east",
 		tags7,
+		 field,
+		NULL,
+		 cave,
+		 "The entrance is just a narrow opening in a small outcrop.\n",
+		"You see",
+		 "The guard stops you from walking into the cave.\n",
+		99,
+		0,
+		0
+	},
+	{	/* 8 = exitCave */
+		alwaysTrue,
+		 "an exit to the west",
+		tags8,
 		 cave,
 		 field,
 		 field,
@@ -116,9 +144,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 8 = wallField */
+	{	/* 9 = wallField */
+		alwaysTrue,
 		 "dense forest all around",
-		tags8,
+		tags9,
 		 field,
 		NULL,
 		NULL,
@@ -129,9 +158,10 @@ OBJECT objs[] = {
 		0,
 		0
 	},
-	{	/* 9 = wallCave */
+	{	/* 10 = wallCave */
+		alwaysTrue,
 		 "solid rock all around",
-		tags9,
+		tags10,
 		 cave,
 		NULL,
 		NULL,

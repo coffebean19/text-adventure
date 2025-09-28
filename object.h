@@ -1,5 +1,6 @@
 
 typedef struct object {
+    bool        (*condition)(void);
     const char *description;
     const char **tags;
     struct object *location;
@@ -22,8 +23,11 @@ extern OBJECT objs[];
 #define guard	(objs + 4)
 #define player	(objs + 5)
 #define intoCave	(objs + 6)
-#define exitCave	(objs + 7)
-#define wallField	(objs + 8)
-#define wallCave	(objs + 9)
+#define intoCaveBlock	(objs + 7)
+#define exitCave	(objs + 8)
+#define wallField	(objs + 9)
+#define wallCave	(objs + 10)
 
-#define endOfObjs	(objs + 10)
+#define endOfObjs	(objs + 11)
+
+#define validObject(obj)	((obj) != NULL && (*(obj)->condition)())
