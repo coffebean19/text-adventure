@@ -1,7 +1,7 @@
 all: success.txt src.zip map.png
 
-C = object.c misc.c noun.c location.c move.c inventory.c parsexec.c main.c
-H = object.h misc.h noun.h location.h move.h inventory.h parsexec.h
+C = object.c misc.c noun.c location.c move.c inventory.c parsexec.c openclose.c reach.c toggle.c main.c 
+H = object.h misc.h noun.h location.h move.h inventory.h parsexec.h openclose.h reach.h toggle.h
 
 success.txt: lilcave testscript.txt baseline.txt
 		./test.sh
