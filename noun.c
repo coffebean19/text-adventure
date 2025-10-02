@@ -29,7 +29,7 @@ static OBJECT *getObject(const char *noun, OBJECT *from, DISTANCE maxDistance) {
 OBJECT *getVisible(const char *intention, const char *noun) {
     OBJECT *obj = getObject(noun, player, distOverThere);
     if (obj == NULL) {
-        if (getObject(noun, player, distNotHere) == NULL){
+        if (getObject(noun, player, distNotHere) == NULL) {
             printf("I don't understand %s.\n", intention);
         } else {
             printf("You don't see any %s here.\n", noun);
