@@ -29,6 +29,8 @@ void moveObject(OBJECT *obj, OBJECT *to) {
         // already handled by getVisible or getPossession
     } else if (to == NULL) {
         printf("There is nobody to receive this.\n");
+    } else if (to->capacity == 0) {
+        printf(obj == keyForBox && (to == closedBox || to == lockedBox) ? "The key seems to fit the lock.\n" : "It doesn't seem to fit it in.\n");
     } else if (obj->weight > to->capacity) {
         printf("That is way too heavy.\n");
     } else if (obj->weight + weightOfContents(to) > to->capacity) {
